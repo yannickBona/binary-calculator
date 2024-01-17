@@ -15,7 +15,7 @@
   --font-small: 0.75rem;
   --font-base: 1rem;
   --font-medium: 1.25rem;
-  --font-large: 3rem;
+  --font-large: 2.5rem;
   --spacing-xs: 0.25rem;
   --spacing-sm: 0.5rem;
   --spacing-bs: 1rem;
@@ -75,6 +75,8 @@ header {
 header h1 {
   font-size: var(--font-large);
   font-weight: 700;
+  letter-spacing: 8px;
+  color: var(--neutral-2);
 }
 
 header h1 > span {
@@ -86,7 +88,8 @@ header h1 > span {
 header p {
   color: var(--neutral-1);
   font-size: var(--font-medium);
-  margin-top: var(--spacing-md);
+  margin-top: var(--spacing-bs);
+  letter-spacing: 1px;
 }
 
 main {
