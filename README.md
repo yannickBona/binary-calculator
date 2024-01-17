@@ -1,2 +1,2 @@
-# binary-calculator
-Binary - Decimal | Decimal - Binary calculator written in Vanilla JS
+# Binary Calculator
+This simple application written in Vanilla JS converts Binary to Decimal & vice versa.
