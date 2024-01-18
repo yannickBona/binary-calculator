@@ -7,16 +7,16 @@ This simple application written in Vanilla JS converts Binary to Decimal & vice 
 Please find below the list of all the supported conversions
 
 ## Positives
-- Binary ⇌ Integer;
-- Integer ⇌ Binary;
-- Float ⇌ Binary;
-- Binary ⇌ Float;
+- Binary → Integer;
+- Integer → Binary;
+- Float → Binary;
+- Binary → Float;
 
 - ## Negatives
-- -Binary ⇌ -Integer;
-- -Integer ⇌ -Binary;
-- -Float ⇌ -Binary;
-- -Binary ⇌ -Float;
+- -Binary → -Integer;
+- -Integer → -Binary;
+- -Float → -Binary;
+- -Binary → -Float;
 
 
  # Feedback
