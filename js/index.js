@@ -5,7 +5,7 @@ const clearButton = document.getElementById("buttonClear");
 const swapButton = document.getElementById("swapButton");
 
 inputBox.addEventListener("focus", hideErrorMessage);
-inputBox.addEventListener("input", restrictBinaryInput);
+inputBox.addEventListener("input", restrictInputFormat);
 
 submitButton.addEventListener("click", convertNumbers);
 swapButton.addEventListener("click", swapConversion);
@@ -25,6 +25,9 @@ function swapConversion() {
 
   inputBox.placeholder = `Enter a ${inputBoxLabel.textContent}`;
   outputBox.placeholder = outputBoxLabel.textContent;
+
+  clearInputs();
+  hideErrorMessage();
 }
 
 /**
@@ -39,8 +42,14 @@ function convertNumbers(e) {
 
   if (!inputNumber) return displayErrorMessage("This field is mandatory");
 
-  const convertedNumber = convertBinaryToDecimal(inputNumber);
-  outputBox.value = convertedNumber.toLocaleString("en-US");
+  const currentConversion = inputBox.name;
+  const convertBinary = currentConversion === "binary";
+
+  const convertedNumber = convertBinary
+    ? convertBinaryToDecimal(inputNumber)
+    : convertDecimalToBinary(+inputNumber);
+
+  outputBox.value = convertedNumber;
 }
 
 /**
@@ -59,21 +68,59 @@ function convertBinaryToDecimal(inputNumber) {
     decimalNumber += squaredNumber;
   }
 
-  return decimalNumber;
+  return decimalNumber.toLocaleString("en-US");
+}
+
+function convertDecimalToBinary(inputNumber) {
+  let binaryString = "";
+
+  while (inputNumber > 0) {
+    const remainder = inputNumber % 2;
+    binaryString = remainder + binaryString;
+    inputNumber = Math.floor(inputNumber / 2);
+  }
+
+  return binaryString;
 }
 
 function clearInputs(e) {
-  e.preventDefault();
+  if (!!e) e.preventDefault();
 
   inputBox.value = "";
   outputBox.value = "";
 }
 
-function restrictBinaryInput(e) {
+function restrictInputFormat(e) {
   hideErrorMessage();
   const currentConversion = inputBox.name;
-  if (currentConversion !== "binary") return;
 
+  const functionConfig = {
+    binary: checkBinaryFormat,
+    decimal: checkDecimalFormat,
+  };
+
+  const conversionFunction = functionConfig[currentConversion];
+  conversionFunction(e);
+}
+
+function checkDecimalFormat(e) {
+  const currentValue = e.target.value;
+  const NUMBER_REGEX = /^-?\d*\.?\d+$/;
+  const NON_NUMBER_REGEX = /[^0-9.-]/g;
+  let formattedNumber = currentValue;
+
+  if (!NUMBER_REGEX.test(currentValue)) {
+    // Replace all non-numeric characters with an empty string
+    formattedNumber = currentValue.replace(NON_NUMBER_REGEX, "");
+    displayErrorMessage(
+      "Insert a valid Decimal Number (Positive, Negative or a Decimal Number)"
+    );
+  }
+
+  e.target.value = formattedNumber;
+}
+
+function checkBinaryFormat(e) {
   const currentValue = e.target.value;
   const BINARY_REGEX = /^[01]*$/;
   const NON_BINARY_REGEX = /[^01]/g;
