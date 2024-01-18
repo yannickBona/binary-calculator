@@ -20,6 +20,6 @@ Please find below the list of all the supported conversions
 
 
  # Feedback
- Any feedback is highly appreciated 🙂
+ Any kind of feedback will be highly appreciated 🙂
 
 
