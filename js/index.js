@@ -68,17 +68,24 @@ function convertBinaryToDecimal(inputNumber) {
     decimalNumber += squaredNumber;
   }
 
-  return decimalNumber.toLocaleString("en-US");
+  const formattedResult = decimalNumber.toLocaleString("en-US");
+
+  return formattedResult;
 }
 
 function convertDecimalToBinary(inputNumber) {
   let binaryString = "";
+  const isNegative = inputNumber < 0;
+
+  if (isNegative) inputNumber *= -1;
 
   while (inputNumber > 0) {
     const remainder = inputNumber % 2;
     binaryString = remainder + binaryString;
     inputNumber = Math.floor(inputNumber / 2);
   }
+
+  if (isNegative) binaryString = `-${binaryString}`;
 
   return binaryString;
 }
@@ -93,6 +100,8 @@ function clearInputs(e) {
 function restrictInputFormat(e) {
   hideErrorMessage();
   const currentConversion = inputBox.name;
+
+  if (!e.target.value) clearInputs();
 
   const functionConfig = {
     binary: checkBinaryFormat,
