@@ -39,7 +39,9 @@ function swapConversion() {
 function convertNumbers(e) {
   e.preventDefault();
   const inputNumber = inputBox.value;
+  const hasError = !!errorMsg.textContent;
 
+  if (hasError) return;
   if (!inputNumber) return displayErrorMessage("This field is mandatory");
 
   const currentConversion = inputBox.name;
@@ -56,6 +58,9 @@ function convertNumbers(e) {
  * Input number must be a string
  *  */
 function convertBinaryToDecimal(inputNumber) {
+  const isNegative = +inputNumber < 0;
+
+  if (isNegative) inputNumber = inputNumber.replace("-", "");
   const numberLength = inputNumber.length - 1;
   const BINARY_BASE = 2;
   let decimalNumber = 0;
@@ -68,8 +73,9 @@ function convertBinaryToDecimal(inputNumber) {
     decimalNumber += squaredNumber;
   }
 
-  const formattedResult = decimalNumber.toLocaleString("en-US");
+  let formattedResult = decimalNumber.toLocaleString("en-US");
 
+  if (isNegative) formattedResult = `-${formattedResult}`;
   return formattedResult;
 }
 
@@ -131,8 +137,8 @@ function checkDecimalFormat(e) {
 
 function checkBinaryFormat(e) {
   const currentValue = e.target.value;
-  const BINARY_REGEX = /^[01]*$/;
-  const NON_BINARY_REGEX = /[^01]/g;
+  const BINARY_REGEX = /^-?[01]*$/;
+  const NON_BINARY_REGEX = /[^01-]/g;
 
   if (BINARY_REGEX.test(currentValue)) return;
 
