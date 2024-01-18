@@ -12,6 +12,7 @@
   --neutral-3: #dee2e6;
   --neutral-4: #e9ecef;
   --neutral-5: #f8f9fa;
+  --error: #ff1100a5;
   --font-small: 0.75rem;
   --font-base: 1rem;
   --font-medium: 1.25rem;
@@ -180,4 +181,9 @@ button {
 
 button:hover {
   opacity: 0.8;
+}
+
+.error-message {
+  color: var(--error);
+  display: none;
 }

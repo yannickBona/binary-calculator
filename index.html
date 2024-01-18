@@ -22,7 +22,7 @@
                     <label for="from">From</label>
                     <input type="text" disabled id="from" value="Binary" />
                 </div>
-                <span title="Swap conversion">⇌</span>
+                <span title="Swap conversion" id="swapButton">⇌</span>
                 <div class="input-field">
                     <label for="to">To</label>
                     <input type="text" disabled id="to" value="Decimal" />
@@ -30,22 +30,25 @@
             </section>
             <form>
                 <div class="input-field">
-                    <label for="input">Decimal Number</label>
-                    <input type="number" id="input" placeholder="Enter a binary number" />
+                    <label for="inputValue">Binary Number</label>
+                    <input name="binary" type="number" id="inputValue" placeholder="Enter a binary number" />
+                    <p class="error-message" id="errorMessage" />
                 </div>
 
                 <div class="input-field">
-                    <label for="output">Binary Number</label>
-                    <input type="number" id="output" disabled placeholder="Decimal number" />
+                    <label for="outputValue">Decimal Number</label>
+                    <input name="decimal" type="text" id="outputValue" disabled placeholder="Decimal number" />
                 </div>
 
                 <div class="buttons-container">
-                    <button>CONVERT</button>
-                    <button>CLEAR</button>
+                    <button id="buttonConvert">CONVERT</button>
+                    <button id="buttonClear">CLEAR</button>
                 </div>
             </form>
         </main>
     </section>
+    <script src="./js/utils.js"></script>
+    <script src="./js/index.js"></script>
 </body>
 
 </html>
