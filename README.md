@@ -9,17 +9,17 @@ Please find below the list of all the supported conversions
 ## Positives
 - Binary → Integer;
 - Integer → Binary;
-- Float → Binary;
-- Binary → Float;
+- Float → Binary (Max. 16 bit precision);
+- Binary → Float (Max. 16 digit precision);
 
 - ## Negatives
 - -Binary → -Integer;
 - -Integer → -Binary;
-- -Float → -Binary;
-- -Binary → -Float;
+- -Float → -Binary (Max. 16 bit precision);
+- -Binary → -Float (Max. 16 digit precision);
 
 
  # Feedback
- Any kind of feedback will be highly appreciated 🙂
+ Any feedback will be highly appreciated 🙂
 
 
