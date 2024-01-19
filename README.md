@@ -9,14 +9,19 @@ Please find below the list of all the supported conversions
 ## Positives
 - Binary → Integer;
 - Integer → Binary;
-- Float → Binary (Max. 16 bit precision);
-- Binary → Float (Max. 16 digit precision);
+- Float → Binary (16-bit precision);
+- Binary → Float (16-digit precision);
 
 - ## Negatives
 - -Binary → -Integer;
 - -Integer → -Binary;
-- -Float → -Binary (Max. 16 bit precision);
-- -Binary → -Float (Max. 16 digit precision);
+- -Float → -Binary (16-bit precision);
+- -Binary → -Float (16-digit precision);
+
+
+## Notes
+The conversion algorithms are the algorithms behind the methods `.toString(number, 2)` and `.parseInt(string, 2)`, which I didn't use to make this project harder ;)
+
 
 
  # Feedback
