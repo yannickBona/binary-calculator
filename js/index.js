@@ -49,7 +49,7 @@ function convertNumbers(e) {
 
   const convertedNumber = convertBinary
     ? convertBinaryToDecimal(inputNumber)
-    : convertDecimalToBinary(+inputNumber);
+    : convertToBinary(+inputNumber);
 
   outputBox.value = convertedNumber;
 }
@@ -79,11 +79,8 @@ function convertBinaryToDecimal(inputNumber) {
   return formattedResult;
 }
 
-function convertDecimalToBinary(inputNumber) {
+function convertIntegerToBinary(inputNumber) {
   let binaryString = "";
-  const isNegative = inputNumber < 0;
-
-  if (isNegative) inputNumber *= -1;
 
   while (inputNumber > 0) {
     const remainder = inputNumber % 2;
@@ -91,8 +88,32 @@ function convertDecimalToBinary(inputNumber) {
     inputNumber = Math.floor(inputNumber / 2);
   }
 
-  if (isNegative) binaryString = `-${binaryString}`;
+  return binaryString;
+}
 
+// Handles floats or integers to binary
+function convertToBinary(inputNumber) {
+  const isNegative = inputNumber < 0;
+  if (isNegative) inputNumber *= -1;
+
+  let integer = Math.floor(inputNumber);
+  let remainder = inputNumber - integer;
+
+  let binaryString = convertIntegerToBinary(integer);
+  if (remainder <= 0) return binaryString;
+
+  let floatPrecision = 16; // 16 bits
+  binaryString += ".";
+
+  while (floatPrecision > 0 && remainder > 0) {
+    remainder *= 2; // Multiply by 2
+    const bit = Math.floor(remainder); // Get integerPart
+    binaryString += bit; // Add bit to the binary string
+    remainder -= bit; // Get new remainder
+    --floatPrecision; // Decrease precision
+  }
+
+  if (isNegative) binaryString = `-${binaryString}`;
   return binaryString;
 }
 
