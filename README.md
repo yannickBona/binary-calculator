@@ -6,18 +6,19 @@ This simple application written in Vanilla JS converts Binary to Decimal & vice 
 # Supported Conversions
 Please find below the list of all the supported conversions
 
-## Positives
+### Positives
 - Binary → Integer;
 - Integer → Binary;
 - Float → Binary (16-bit precision);
 - Binary → Float (16-digit precision);
 
-- ## Negatives
+### Negatives
 - -Binary → -Integer;
 - -Integer → -Binary;
 - -Float → -Binary (16-bit precision);
 - -Binary → -Float (16-digit precision);
 
+--- 
 
 ## Notes
 The conversion algorithms refer to the processes underlying the methods `.toString(number, 2)` and `.parseInt(string, 2)`, which already convert Binary to Decimal and vice versa.
