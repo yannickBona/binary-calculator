@@ -48,7 +48,7 @@ function convertNumbers(e) {
   const convertBinary = currentConversion === "binary";
 
   const convertedNumber = convertBinary
-    ? convertBinaryToDecimal(inputNumber)
+    ? convertToDecimal(inputNumber)
     : convertToBinary(+inputNumber);
 
   outputBox.value = convertedNumber;
@@ -58,9 +58,6 @@ function convertNumbers(e) {
  * Input number must be a string
  *  */
 function convertBinaryToDecimal(inputNumber) {
-  const isNegative = +inputNumber < 0;
-
-  if (isNegative) inputNumber = inputNumber.replace("-", "");
   const numberLength = inputNumber.length - 1;
   const BINARY_BASE = 2;
   let decimalNumber = 0;
@@ -73,9 +70,41 @@ function convertBinaryToDecimal(inputNumber) {
     decimalNumber += squaredNumber;
   }
 
-  let formattedResult = decimalNumber.toLocaleString("en-US");
+  return decimalNumber;
+}
+
+function convertToDecimal(binaryInput) {
+  const isNegative = +binaryInput < 0;
+  if (isNegative) binaryInput = binaryInput.replace("-", "");
+  const [integerPart, fractionalPart] = binaryInput.split(".");
+
+  let decimalNumber = convertBinaryToDecimal(integerPart);
+
+  // Handle integer base case
+  if (!binaryInput.includes(".")) {
+    const formattedResult = decimalNumber.toLocaleString("en-US");
+    return isNegative ? `-${formattedResult}` : formattedResult;
+  }
+
+  let decimalFraction = 0;
+  const decimalLength = fractionalPart.length;
+
+  for (let i = 0; i < decimalLength; i++) {
+    const binary = +fractionalPart[i];
+
+    const result = binary * Math.pow(2, -(i + 1));
+    console.log(result);
+    decimalFraction += result;
+  }
+
+  decimalNumber += decimalFraction;
+  console.log(decimalNumber, decimalFraction);
+  let formattedResult = decimalNumber.toLocaleString("en-US", {
+    maximumFractionDigits: "16",
+  });
 
   if (isNegative) formattedResult = `-${formattedResult}`;
+
   return formattedResult;
 }
 
@@ -100,7 +129,8 @@ function convertToBinary(inputNumber) {
   let remainder = inputNumber - integer;
 
   let binaryString = convertIntegerToBinary(integer);
-  if (remainder <= 0) return binaryString;
+
+  if (remainder <= 0) return isNegative ? `-${binaryString}` : binaryString;
 
   let floatPrecision = 16; // 16 bits
   binaryString += ".";
@@ -158,12 +188,12 @@ function checkDecimalFormat(e) {
 
 function checkBinaryFormat(e) {
   const currentValue = e.target.value;
-  const BINARY_REGEX = /^-?[01]*$/;
-  const NON_BINARY_REGEX = /[^01-]/g;
+  const BINARY_REGEX = /^-?[01]*\.?[01]*$/;
+  const NON_BINARY_REGEX = /[^01.-]/g;
 
   if (BINARY_REGEX.test(currentValue)) return;
 
-  // Remove non-binary numbers
+  // Remove non-binary characters
   e.target.value = currentValue.replace(NON_BINARY_REGEX, "");
   displayErrorMessage("Insert a valid binary number (0-1 digits)");
 }
