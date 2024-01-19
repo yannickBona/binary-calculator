@@ -20,7 +20,8 @@ Please find below the list of all the supported conversions
 
 
 ## Notes
-The conversion algorithms are the algorithms behind the methods `.toString(number, 2)` and `.parseInt(string, 2)`, which I didn't use to make this project harder ;)
+The conversion algorithms refer to the processes underlying the methods `.toString(number, 2)` and `.parseInt(string, 2)`, which already convert Binary to Decimal and vice versa.
+These two methods were not used to obtain the final results to enhance the complexity of this project.
 
 
 
